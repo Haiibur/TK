@@ -41,7 +41,21 @@ class HandlerNotif extends CI_Controller
 
     public function github() {
         // Menerima data JSON dari GitHub
-        $payload = file_get_contents('php://input');
+        $payload = json_decode(file_get_contents('php://input'));
+
+        date_default_timezone_set('Asia/Jakarta');
+        $tanggalSekarang = date("Y-m-d H:i:s");
+        
+        // Mendapatkan data yang dibutuhkan
+        $userData=[
+            'user_github'=>$payload->sender->login,
+            'avatar_github'=>$payload->sender->avatar_url,
+            'url_github'=>$payload->sender->html_url,
+            'repository_github'=>$payload->repository->html_url,
+            'waktu'=>$tanggalSekarang
+        ];
+        
+        $this->db->insert('webhook', $userData);
 
         // Catat payload ke file log atau lakukan apa pun yang diperlukan
         $this->logPayload($payload);

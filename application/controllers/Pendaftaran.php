@@ -23,8 +23,8 @@ class Pendaftaran extends CI_Controller
         header("Access-Control-Allow-Methods: GET, OPTIONS");
         $data = array(
             'base'            => base_url(),
-            'site'             => site_url('Pendaftaran/token'),
-            'finish'         => site_url('Pendaftaran/finish'),
+            'site'            => site_url('Pendaftaran/token'),
+            'finish'          => site_url('Pendaftaran/finish'),
         );
 
         $this->load->view('Pendaftaran', $data);
